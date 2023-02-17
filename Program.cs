@@ -10,7 +10,7 @@ for (int row = 0; row < inputSize; row++)
     for (int col = 0; col < inputSize; col++)
     {
         matrix[row, col] = Math.Pow(2, (col + row));
-        Console.Write(matrix[row, col] + " ");
+        Console.Write(matrix[row, col] + ", ");
     }
     Console.WriteLine();
 }
