@@ -1,31 +1,30 @@
 ﻿// See https://aka.ms/new-console-template for more information
 Console.WriteLine("Hello, World!");
 
-int inputSize = int.Parse(Console.ReadLine());
-double[,] matrix = new double[inputSize, inputSize];
-//int flag = 0;
+double firstNum = double.Parse(Console.ReadLine());
+char operand = char.Parse(Console.ReadLine());
+double secondNum = double.Parse(Console.ReadLine());
+double result;
 
-for (int row = 0; row < inputSize; row++)
+switch (operand)
 {
-    for (int col = 0; col < inputSize; col++)
-    {
-        matrix[row, col] = Math.Pow(2, (col + row));
-        Console.Write(matrix[row, col] + ", ,  ");
-    }
-    Console.WriteLine();
+	case '+':  
+		result = firstNum + secondNum;
+		Console.WriteLine("Result is: {0}", result);
+		break;
+	case '-': 
+		result = firstNum - secondNum;
+        Console.WriteLine("Result is: {0}", result); 
+		break;
+	case '*': 
+		result = firstNum * secondNum; 
+		Console.WriteLine("Result is: {0}", result);
+        break;
+	case '/': 
+		result = firstNum / secondNum; 
+		Console.WriteLine("Result is: {0}", result);
+        break;
+	default:
+		Console.WriteLine("Invalid operand");
+		break;
 }
-
-double sum = 0;
-for (int r = 0; r < inputSize; r++)
-{
-    for (int c = 0; c < inputSize; c++)
-    {
-        if (c > r)
-        {
-            sum += matrix[r, c];
-        }
-
-    }
-}
-Console.WriteLine(sum);
-
