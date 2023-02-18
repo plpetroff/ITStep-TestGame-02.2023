@@ -1,30 +1,27 @@
 ﻿// See https://aka.ms/new-console-template for more information
 Console.WriteLine("Hello, World!");
 
-double firstNum = double.Parse(Console.ReadLine());
-char operand = char.Parse(Console.ReadLine());
-double secondNum = double.Parse(Console.ReadLine());
-double result;
+// Task 4
 
-switch (operand)
+string inputText = Console.ReadLine();
+char delimiterrr = char.Parse(Console.ReadLine());
+
+Console.WriteLine(inputText.CountParts(delimiterrr));
+
+
+public static class ExstensionMethod
 {
-	case '+':  
-		result = firstNum + secondNum;
-		Console.WriteLine("Result is: {0}", result);
-		break;
-	case '-': 
-		result = firstNum - secondNum;
-        Console.WriteLine("Result is: {0}", result); 
-		break;
-	case '*': 
-		result = firstNum * secondNum; 
-		Console.WriteLine("Result is: {0}", result);
-        break;
-	case '/': 
-		result = firstNum / secondNum; 
-		Console.WriteLine("Result is: {0}", result);
-        break;
-	default:
-		Console.WriteLine("Invalid operand");
-		break;
+    public static int CountParts(this string source, char delimiter)
+    {
+        int partCount = 1;
+        for (int i = 0; i < source.Length; i++)
+        {
+            if (source[i] == delimiter)
+            {
+                partCount++;
+            }
+        }
+
+        return partCount;
+    }
 }
