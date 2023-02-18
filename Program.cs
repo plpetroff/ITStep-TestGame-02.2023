@@ -1,27 +1,21 @@
 ﻿// See https://aka.ms/new-console-template for more information
+
 Console.WriteLine("Hello, World!");
 
-// Task 4
+// Task 7
 
-string inputText = Console.ReadLine();
-char delimiterrr = char.Parse(Console.ReadLine());
+char char1 = char.Parse(Console.ReadLine());
+char char2 = char.Parse(Console.ReadLine());
 
-Console.WriteLine(inputText.CountParts(delimiterrr));
+int count = Math.Abs(char1 - char2);
+Console.WriteLine(count);
 
-
-public static class ExstensionMethod
+for (int i = char1; i < char2; i++)
 {
-    public static int CountParts(this string source, char delimiter)
-    {
-        int partCount = 1;
-        for (int i = 0; i < source.Length; i++)
-        {
-            if (source[i] == delimiter)
-            {
-                partCount++;
-            }
-        }
-
-        return partCount;
-    }
+    Console.WriteLine((char)i);
 }
+
+
+
+
+
