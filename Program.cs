@@ -21,49 +21,77 @@ internal class Program
 
         Dictionary<string, double> carsInParking = new Dictionary<string, double>();
 
-        string inputInfo = Console.ReadLine();
-        string[] plateInfo = inputInfo.Split(',');
+        string inputInfo = "";
 
-        //Check if plateInfo is only 1 substring;
-        if (plateInfo.Length == 1)
+
+        while (inputInfo != "end")
         {
-            //  If YES: check if plate is contains in carsInParking
+            inputInfo = Console.ReadLine();
+            string[] plateInfo = inputInfo.Split(',');
             string plate = plateInfo[0];
-            if (carsInParking.ContainsKey(plate))
+            double price = 0;
+
+
+            //Check if plateInfo is only 1 substring(e.g. ENTER);
+            if (plateInfo.Length == 1)
             {
-                //If YES:  car tries to enter second time without leaving - print msg
+                //  If YES: check if plate is contains in carsInParking
+
+                if (carsInParking.ContainsKey(plate))
+                {
+                    //If YES:  car tries to enter second time without leaving - print msg
+                    Console.WriteLine("Invalid number plate! The car is allready in the parking!");
+                }
+                else
+                {
+                    //      If NO:  put plate in carsInParking as a KEY
+                    carsInParking.Add(plate, 0);
+                }
             }
             else
             {
-                //      If NO:  put plate in carsInParking as a KEY
+                //  If NO (e.g. EXIT): check if plate is in the carsInParking as a KEY
+                if (carsInParking.ContainsKey(plate))
+                {
+                    //          If YES calculate price and remove as a KEY
+                    Console.WriteLine(plateInfo[0]);
+                    Console.WriteLine(plateInfo[1]);
+
+                    double time = Double.Parse(plateInfo[1].ToString());
+                    price = CalculatePrice(time);
+                    Console.WriteLine(price);
+                    carsInParking.Remove(plate);
+                }
+                else
+                {
+                    //          If NO car tries to leave without enter - print msg
+                    Console.WriteLine("Invalid number plate! Such car was not ENTER");
+
+                }
+
+
             }
+
+        }
+
+
+
+        //Console.WriteLine(plateInfo[0]);
+        //Console.WriteLine(plateInfo[1]);
+    }
+
+    private static double CalculatePrice(double time)
+    {
+        double result = 0;
+        if (time > 6)
+        {
+            result = (5) * 1.5 + (time - 6) * 3;
         }
         else
         {
-            //  If NO: check if plate is in the carsInParking as a KEY
-            if (true)
-            {
-                //          If YES calculate price and remove as a KEY
-            }
-            else
-            {
-                //          If NO car tries to leave without enter - print msg
-            }
-
-
+            result = (time - 1) * 1.5;
         }
 
-
-        
-         
-        
-        
-        
-        
-
-
-
-        Console.WriteLine(plateInfo[0]);
-        Console.WriteLine(plateInfo[1]);
+        return result;
     }
 }
