@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using System.ComponentModel;
+using System.Globalization;
 using System.Security.AccessControl;
 
 internal class Program
@@ -8,6 +9,7 @@ internal class Program
     private static void Main(string[] args)
     {
         Console.WriteLine("Hello, World!");
+        Console.WriteLine("CurrentCulture is now {0}.", CultureInfo.CurrentCulture.Name);
 
         // Task 7 Car Plates
 
@@ -56,8 +58,9 @@ internal class Program
                     //          If YES calculate price and remove as a KEY
                     Console.WriteLine(plateInfo[0]);
                     Console.WriteLine(plateInfo[1]);
+                    //double time = Double.Parse("2,5");
 
-                    double time = Double.Parse(plateInfo[1].ToString());
+                    double time = Double.Parse(plateInfo[1].Replace(".", ","));
                     price = CalculatePrice(time);
                     Console.WriteLine(price);
                     carsInParking.Remove(plate);
