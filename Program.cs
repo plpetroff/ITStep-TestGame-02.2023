@@ -60,7 +60,8 @@ internal class Program
                     Console.WriteLine(plateInfo[1]);
                     //double time = Double.Parse("2,5");
 
-                    double time = Double.Parse(plateInfo[1].Replace(".", ","));
+                    //double time = Double.Parse(plateInfo[1].Replace(".", ","));
+                    double time = Double.Parse(plateInfo[1], CultureInfo.InvariantCulture);
                     price = CalculatePrice(time);
                     Console.WriteLine(price);
                     carsInParking.Remove(plate);
