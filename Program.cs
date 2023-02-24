@@ -1,101 +1,62 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using System.ComponentModel;
-using System.Globalization;
-using System.Security.AccessControl;
-
-internal class Program
+class Program
 {
-    private static void Main(string[] args)
+    private static List<Element> gun;
+
+    private static Element[] directions = new Element[]
     {
-        Console.WriteLine("Hello, World!");
-        Console.WriteLine("CurrentCulture is now {0}.", CultureInfo.CurrentCulture.Name);
+        new Element(0,1), // right
+        new Element(0,-1), // left
+    };
 
-        // Task 7 Car Plates
-
-        ////Write a program that holds an information about cars entering and leaving the parking. The functionality we want is:
-        //No car can enter the parking 2 times without leaving
-        //On every entrance you will receive number plate
-        //On every exit you will receive number plate and number of hours (CB 11111 AA,2.5)
-        //Your task is to calculate the price per stay of every car (first hour is free, after that every hour 1.50 lv, after 6-th hour every hour is 3lv)
-        //If a car tries to enter second time without leaving, or leave without enter print the message (“Invalid number plate”)
-        //Also the parking will have some special guests which are not paying for the stay, their number plates are (CB 11111 AA), (B BBBB B), (CB 7777 CB)
-
-        Dictionary<string, double> carsInParking = new Dictionary<string, double>();
-
-        string inputInfo = "";
+    private const int right = 0;
+    private const int left = 1;
+    private const char symbol = '*';
 
 
-        while (inputInfo != "end")
-        {
-            inputInfo = Console.ReadLine();
-            string[] plateInfo = inputInfo.Split(',');
-            string plate = plateInfo[0];
-            double price = 0;
+    static void Main(string[] args)
+    {
+        SetUpConsole();
+        SetUpGun(5);
+        DrowGun();
 
-
-            //Check if plateInfo is only 1 substring(e.g. ENTER);
-            if (plateInfo.Length == 1)
-            {
-                //  If YES: check if plate is contains in carsInParking
-
-                if (carsInParking.ContainsKey(plate))
-                {
-                    //If YES:  car tries to enter second time without leaving - print msg
-                    Console.WriteLine("Invalid number plate! The car is allready in the parking!");
-                }
-                else
-                {
-                    //      If NO:  put plate in carsInParking as a KEY
-                    carsInParking.Add(plate, 0);
-                }
-            }
-            else
-            {
-                //  If NO (e.g. EXIT): check if plate is in the carsInParking as a KEY
-                if (carsInParking.ContainsKey(plate))
-                {
-                    //          If YES calculate price and remove as a KEY
-                    Console.WriteLine(plateInfo[0]);
-                    Console.WriteLine(plateInfo[1]);
-                    //double time = Double.Parse("2,5");
-
-                    //double time = Double.Parse(plateInfo[1].Replace(".", ","));
-                    double time = Double.Parse(plateInfo[1], CultureInfo.InvariantCulture);
-                    price = CalculatePrice(time);
-                    Console.WriteLine(price);
-                    carsInParking.Remove(plate);
-                }
-                else
-                {
-                    //          If NO car tries to leave without enter - print msg
-                    Console.WriteLine("Invalid number plate! Such car was not ENTER");
-
-                }
-
-
-            }
-
-        }
-
-
-
-        //Console.WriteLine(plateInfo[0]);
-        //Console.WriteLine(plateInfo[1]);
+        
     }
 
-    private static double CalculatePrice(double time)
+    static void DrowGun()
     {
-        double result = 0;
-        if (time > 6)
+        foreach (var item in gun)
         {
-            result = (5) * 1.5 + (time - 6) * 3;
+            Console.SetCursorPosition(item.Row, item.Col);
+            Console.Write(symbol);
         }
-        else
-        {
-            result = (time - 1) * 1.5;
-        }
+    }
 
-        return result;
+    static void SetUpGun(int size)
+    {
+        gun = new List<Element>();
+        for (int i = 0; i < size; i++)
+        {
+            gun.Add(new Element(0, i));
+        }
+    }
+
+    static void SetUpConsole()
+    {
+        Console.CursorVisible = false;
+
+    }
+
+    class Element
+    {
+        public Element(int row, int col)
+        {
+            Row = row;
+            Col = col;
+        }
+    
+        public int Row { get; set; }    
+        public int Col { get; set; }    
     }
 }
