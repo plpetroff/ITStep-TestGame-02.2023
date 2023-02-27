@@ -4,15 +4,17 @@ class Program
 {
     private static List<Element> gun;
 
+    private const int rightDirection = 0;
+    private const int leftDirection = 1;
+    private const string symbol = "*";
+
+
     private static Element[] directions = new Element[]
     {
         new Element(0,1), // right
         new Element(0,-1), // left
     };
 
-    private const int right = 0;
-    private const int left = 1;
-    private const char symbol = '*';
 
 
     static void Main(string[] args)
@@ -21,17 +23,57 @@ class Program
         SetUpGun(5);
         DrowGun();
 
-        
+        int direction = rightDirection;
+
+        while (true)
+        {
+            MoveGun(direction);
+
+            Thread.Sleep(70);
+        }
+
+
     }
+
+
+    static void MoveGun(int direction)
+    {
+        Element removedElement = gun.First();
+        ClearPoint(removedElement);
+        gun.Remove(removedElement);
+
+        Element currentHead = gun.Last();
+        Element currenDirection = directions[direction];
+        Element addedElement = new Element(currentHead.Row + currenDirection.Row, currentHead.Col + currenDirection.Col);
+
+        gun.Add(addedElement);
+        DrowPoint(addedElement, symbol);
+
+    }
+
+    private static void ClearPoint(Element el)
+    {
+        Console.SetCursorPosition(el.Col, el.Row);
+        Console.Write(" ");
+    }
+
+
+    private static void DrowPoint(Element el, string symbol)
+    {
+        Console.SetCursorPosition(el.Col, el.Row);
+        Console.WriteLine(symbol);
+    }
+
 
     static void DrowGun()
     {
         foreach (var item in gun)
         {
-            Console.SetCursorPosition(item.Row, item.Col);
+            Console.SetCursorPosition(item.Col, item.Row);
             Console.Write(symbol);
         }
     }
+
 
     static void SetUpGun(int size)
     {
@@ -42,11 +84,14 @@ class Program
         }
     }
 
+
     static void SetUpConsole()
     {
         Console.CursorVisible = false;
 
     }
+
+
 
     class Element
     {
@@ -55,8 +100,8 @@ class Program
             Row = row;
             Col = col;
         }
-    
-        public int Row { get; set; }    
-        public int Col { get; set; }    
+
+        public int Row { get; set; }
+        public int Col { get; set; }
     }
 }
