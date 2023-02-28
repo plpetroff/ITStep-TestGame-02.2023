@@ -31,11 +31,11 @@ class Program
             {
                 ConsoleKey key = Console.ReadKey().Key;
 
-                if (key == ConsoleKey.RightArrow && direction != leftDirection)
+                if (key == ConsoleKey.RightArrow && direction != rightDirection)
                 {
                     direction = rightDirection;
                 }
-                if (key == ConsoleKey.LeftArrow && direction != rightDirection)
+                if (key == ConsoleKey.LeftArrow && direction != leftDirection)
                 {
                     direction = leftDirection;
                 }
