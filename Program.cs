@@ -40,15 +40,12 @@ class Program
                     direction = leftDirection;
                 }
             }
-            else
-            {
-                Thread.Sleep(500);
-            }
+            
 
 
             MoveGun(direction);
 
-            Thread.Sleep(70);
+            Thread.Sleep(75);
         }
 
 
@@ -67,6 +64,11 @@ class Program
             Coordinates currenDirection = directions[direction];
             Coordinates addedElement = new Coordinates(currentHead.Row + currenDirection.Row, currentHead.Col + currenDirection.Col);
 
+            if (addedElement.Col > Console.BufferWidth)
+            {
+                addedElement.Col = Console.BufferWidth;
+            }
+
             gun.Add(addedElement);
             DrowPoint(addedElement, symbol);
         }
@@ -79,6 +81,12 @@ class Program
             Coordinates currentHead = gun.First();
             Coordinates currenDirection = directions[direction];
             Coordinates addedElement = new Coordinates(currentHead.Row + currenDirection.Row, currentHead.Col + currenDirection.Col);
+
+            if (addedElement.Col < 0)
+            {
+                addedElement.Col = 0;
+                
+            }
 
             gun.Insert(0, addedElement);
             DrowPoint(addedElement, symbol);
@@ -115,16 +123,19 @@ class Program
     static void SetUpGun(int size)
     {
         gun = new List<Coordinates>();
-        for (int i = 50; i < 50 + size; i++)
+        for (int i = 35; i < 35 + size; i++)
         {
-            gun.Add(new Coordinates(0, i));
+            gun.Add(new Coordinates(20, i));
         }
     }
 
 
     static void SetUpConsole()
     {
+        Console.Clear();
         Console.CursorVisible = false;
+        Console.BufferHeight = Console.WindowHeight;
+        Console.BufferWidth = Console.WindowWidth;
 
     }
 
