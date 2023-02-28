@@ -2,17 +2,17 @@
 
 class Program
 {
-    private static List<Element> gun;
+    private static List<Coordinates> gun;
 
     private const int rightDirection = 0;
     private const int leftDirection = 1;
     private const string symbol = "*";
 
 
-    private static Element[] directions = new Element[]
+    private static Coordinates[] directions = new Coordinates[]
     {
-        new Element(0,1), // right
-        new Element(0,-1), // left
+        new Coordinates(0,1), // rightDirection
+        new Coordinates(0,-1), // leftDirection
     };
 
 
@@ -23,10 +23,29 @@ class Program
         SetUpGun(5);
         DrowGun();
 
-        int direction = rightDirection;
+        int direction = leftDirection;
 
         while (true)
         {
+            if (Console.KeyAvailable)
+            {
+                ConsoleKey key = Console.ReadKey().Key;
+
+                if (key == ConsoleKey.RightArrow && direction != leftDirection)
+                {
+                    direction = rightDirection;
+                }
+                if (key == ConsoleKey.LeftArrow && direction != rightDirection)
+                {
+                    direction = leftDirection;
+                }
+            }
+            else
+            {
+                Thread.Sleep(500);
+            }
+
+
             MoveGun(direction);
 
             Thread.Sleep(70);
@@ -38,27 +57,44 @@ class Program
 
     static void MoveGun(int direction)
     {
-        Element removedElement = gun.First();
-        ClearPoint(removedElement);
-        gun.Remove(removedElement);
+        if (direction == rightDirection)
+        {
+            Coordinates removedElement = gun.First();
+            ClearPoint(removedElement);
+            gun.Remove(removedElement);
 
-        Element currentHead = gun.Last();
-        Element currenDirection = directions[direction];
-        Element addedElement = new Element(currentHead.Row + currenDirection.Row, currentHead.Col + currenDirection.Col);
+            Coordinates currentHead = gun.Last();
+            Coordinates currenDirection = directions[direction];
+            Coordinates addedElement = new Coordinates(currentHead.Row + currenDirection.Row, currentHead.Col + currenDirection.Col);
 
-        gun.Add(addedElement);
-        DrowPoint(addedElement, symbol);
+            gun.Add(addedElement);
+            DrowPoint(addedElement, symbol);
+        }
+        else if (direction == leftDirection)
+        {
+            Coordinates removedElement = gun.Last();
+            ClearPoint(removedElement);
+            gun.Remove(removedElement);
+
+            Coordinates currentHead = gun.First();
+            Coordinates currenDirection = directions[direction];
+            Coordinates addedElement = new Coordinates(currentHead.Row + currenDirection.Row, currentHead.Col + currenDirection.Col);
+
+            gun.Insert(0, addedElement);
+            DrowPoint(addedElement, symbol);
+        }
+
 
     }
 
-    private static void ClearPoint(Element el)
+    private static void ClearPoint(Coordinates el)
     {
         Console.SetCursorPosition(el.Col, el.Row);
         Console.Write(" ");
     }
 
 
-    private static void DrowPoint(Element el, string symbol)
+    private static void DrowPoint(Coordinates el, string symbol)
     {
         Console.SetCursorPosition(el.Col, el.Row);
         Console.WriteLine(symbol);
@@ -70,6 +106,7 @@ class Program
         foreach (var item in gun)
         {
             Console.SetCursorPosition(item.Col, item.Row);
+            
             Console.Write(symbol);
         }
     }
@@ -77,10 +114,10 @@ class Program
 
     static void SetUpGun(int size)
     {
-        gun = new List<Element>();
-        for (int i = 0; i < size; i++)
+        gun = new List<Coordinates>();
+        for (int i = 50; i < 50 + size; i++)
         {
-            gun.Add(new Element(0, i));
+            gun.Add(new Coordinates(0, i));
         }
     }
 
@@ -93,9 +130,9 @@ class Program
 
 
 
-    class Element
+    class Coordinates
     {
-        public Element(int row, int col)
+        public Coordinates(int row, int col)
         {
             Row = row;
             Col = col;
