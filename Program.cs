@@ -40,12 +40,12 @@ class Program
                     direction = leftDirection;
                 }
             }
-            
+
 
 
             MoveGun(direction);
 
-            Thread.Sleep(75);
+            Thread.Sleep(105);
         }
 
 
@@ -64,9 +64,9 @@ class Program
             Coordinates currenDirection = directions[direction];
             Coordinates addedElement = new Coordinates(currentHead.Row + currenDirection.Row, currentHead.Col + currenDirection.Col);
 
-            if (addedElement.Col > Console.BufferWidth)
+            if (addedElement.Col >= Console.BufferWidth)
             {
-                addedElement.Col = Console.BufferWidth;
+                addedElement.Col = Console.BufferWidth - 1;
             }
 
             gun.Add(addedElement);
@@ -74,22 +74,26 @@ class Program
         }
         else if (direction == leftDirection)
         {
-            Coordinates removedElement = gun.Last();
-            ClearPoint(removedElement);
-            gun.Remove(removedElement);
+            Coordinates addedElement;
+            
+                Coordinates removedElement = gun.Last();
+                ClearPoint(removedElement);
+                gun.Remove(removedElement);
 
-            Coordinates currentHead = gun.First();
-            Coordinates currenDirection = directions[direction];
-            Coordinates addedElement = new Coordinates(currentHead.Row + currenDirection.Row, currentHead.Col + currenDirection.Col);
+                Coordinates currentHead = gun.First();
+                Coordinates currenDirection = directions[direction];
+                addedElement = new Coordinates(currentHead.Row + currenDirection.Row, currentHead.Col + currenDirection.Col);
+
+
 
             if (addedElement.Col < 0)
             {
                 addedElement.Col = 0;
-                
-            }
 
+            }
             gun.Insert(0, addedElement);
             DrowPoint(addedElement, symbol);
+
         }
 
 
@@ -114,7 +118,7 @@ class Program
         foreach (var item in gun)
         {
             Console.SetCursorPosition(item.Col, item.Row);
-            
+
             Console.Write(symbol);
         }
     }
@@ -123,7 +127,7 @@ class Program
     static void SetUpGun(int size)
     {
         gun = new List<Coordinates>();
-        for (int i = 35; i < 35 + size; i++)
+        for (int i = 30; i < 30 + size; i++)
         {
             gun.Add(new Coordinates(20, i));
         }
