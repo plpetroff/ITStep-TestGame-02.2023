@@ -57,42 +57,46 @@ class Program
         if (direction == rightDirection)
         {
             Coordinates removedElement = gun.First();
-            ClearPoint(removedElement);
-            gun.Remove(removedElement);
-
+            
             Coordinates currentHead = gun.Last();
             Coordinates currenDirection = directions[direction];
-            Coordinates addedElement = new Coordinates(currentHead.Row + currenDirection.Row,                                               currentHead.Col + currenDirection.Col);
+            Coordinates addedElement = new Coordinates(currentHead.Row + currenDirection.Row, currentHead.Col + currenDirection.Col);
 
-            if (addedElement.Col >= Console.BufferWidth)
+            if (addedElement.Col < Console.BufferWidth)
             {
-                addedElement.Col = Console.BufferWidth - 1;
+                
+
+                ClearPoint(removedElement);
+                gun.Remove(removedElement);
+                gun.Add(addedElement);
+                DrowPoint(addedElement, symbol);
             }
 
-            gun.Add(addedElement);
-            DrowPoint(addedElement, symbol);
+
         }
         else if (direction == leftDirection)
         {
             Coordinates addedElement;
-            
-                Coordinates removedElement = gun.Last();
+
+            Coordinates removedElement = gun.Last();
+
+
+            Coordinates currentHead = gun.First();
+            Coordinates currenDirection = directions[direction];
+            addedElement = new Coordinates(currentHead.Row + currenDirection.Row, currentHead.Col + currenDirection.Col);
+
+
+
+            if (addedElement.Col >= 0)
+            {
+                gun.Insert(0, addedElement);
+                DrowPoint(addedElement, symbol);
                 ClearPoint(removedElement);
                 gun.Remove(removedElement);
 
-                Coordinates currentHead = gun.First();
-                Coordinates currenDirection = directions[direction];
-                addedElement = new Coordinates(currentHead.Row + currenDirection.Row,                                           currentHead.Col + currenDirection.Col);
-
-
-
-            if (addedElement.Col < 0)
-            {
-                addedElement.Col = 0;
-
             }
-            gun.Insert(0, addedElement);
-            DrowPoint(addedElement, symbol);
+
+
 
         }
 
@@ -127,7 +131,7 @@ class Program
     static void SetUpGun(int size)
     {
         gun = new List<Coordinates>();
-        for (int i = 30; i < 30 + size; i++)
+        for (int i = Console.BufferWidth / 2; i < Console.BufferWidth / 2 + size; i++)
         {
             gun.Add(new Coordinates(20, i));
         }
