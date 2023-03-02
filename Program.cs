@@ -62,7 +62,7 @@ class Program
 
             Coordinates currentHead = gun.Last();
             Coordinates currenDirection = directions[direction];
-            Coordinates addedElement = new Coordinates(currentHead.Row + currenDirection.Row, currentHead.Col + currenDirection.Col);
+            Coordinates addedElement = new Coordinates(currentHead.Row + currenDirection.Row,                                               currentHead.Col + currenDirection.Col);
 
             if (addedElement.Col >= Console.BufferWidth)
             {
@@ -82,7 +82,7 @@ class Program
 
                 Coordinates currentHead = gun.First();
                 Coordinates currenDirection = directions[direction];
-                addedElement = new Coordinates(currentHead.Row + currenDirection.Row, currentHead.Col + currenDirection.Col);
+                addedElement = new Coordinates(currentHead.Row + currenDirection.Row,                                           currentHead.Col + currenDirection.Col);
 
 
 
