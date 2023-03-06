@@ -27,7 +27,7 @@ class Program
         SetUpGun(sizeOfGun);
         DrowGun();
         GenerateEnemy(2);
-        Shoot();
+        
 
         int direction= leftDirection;
 
@@ -174,11 +174,15 @@ class Program
     {
         Coordinates midElementOfGun = gun.FirstOrDefault();
         
-        for (int i = 0; i < midElementOfGun.Row; i++)
-        {            
+        for (int i = midElementOfGun.Row-1; i > 0; i--)
+        {           
+            
             Console.SetCursorPosition(midElementOfGun.Col, i );
             Console.WriteLine(bullet);
-            
+            Console.SetCursorPosition(midElementOfGun.Col, i+1);
+            Console.Write(" ");
+            Thread.Sleep(30);
+
         }
     }
 
