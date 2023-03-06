@@ -3,10 +3,14 @@
 class Program
 {
     private static List<Coordinates> gun;
+    private static Random rnd = new Random();
 
     private const int rightDirection = 0;
     private const int leftDirection = 1;
     private const string symbol = "*";
+    private const string bullet = "|";
+    private const int sizeOfGun = 7;
+    private const int rowPositionOfGun = 20;
 
 
     private static Coordinates[] directions = new Coordinates[]
@@ -20,10 +24,12 @@ class Program
     static void Main(string[] args)
     {
         SetUpConsole();
-        SetUpGun(5);
+        SetUpGun(sizeOfGun);
         DrowGun();
+        GenerateEnemy(2);
+        Shoot();
 
-        int direction = leftDirection;
+        int direction= leftDirection;
 
         while (true)
         {
@@ -39,13 +45,16 @@ class Program
                 {
                     direction = leftDirection;
                 }
+                if (key == ConsoleKey.Spacebar)
+                {
+                    Shoot();
+                }
             }
-
 
 
             MoveGun(direction);
 
-            Thread.Sleep(105);
+            Thread.Sleep(90);
         }
 
 
@@ -57,14 +66,14 @@ class Program
         if (direction == rightDirection)
         {
             Coordinates removedElement = gun.First();
-            
+
             Coordinates currentHead = gun.Last();
             Coordinates currenDirection = directions[direction];
             Coordinates addedElement = new Coordinates(currentHead.Row + currenDirection.Row, currentHead.Col + currenDirection.Col);
 
             if (addedElement.Col < Console.BufferWidth)
             {
-                
+
 
                 ClearPoint(removedElement);
                 gun.Remove(removedElement);
@@ -133,7 +142,7 @@ class Program
         gun = new List<Coordinates>();
         for (int i = Console.BufferWidth / 2; i < Console.BufferWidth / 2 + size; i++)
         {
-            gun.Add(new Coordinates(20, i));
+            gun.Add(new Coordinates(rowPositionOfGun, i));
         }
     }
 
@@ -147,7 +156,31 @@ class Program
 
     }
 
+    static void GenerateEnemy(int level)
+    {
 
+        for (int i = 0; i < level; i++)
+        {
+            var enemyRow = rnd.Next(0, Console.BufferHeight / 4);
+            var enemyCol = rnd.Next(5, Console.BufferWidth - 5);
+            Console.SetCursorPosition(enemyCol, enemyRow);
+            Console.WriteLine("###");
+
+        }
+
+    }
+
+    static void Shoot()
+    {
+        Coordinates midElementOfGun = gun.FirstOrDefault();
+        
+        for (int i = 0; i < midElementOfGun.Row; i++)
+        {            
+            Console.SetCursorPosition(midElementOfGun.Col, i );
+            Console.WriteLine(bullet);
+            
+        }
+    }
 
     class Coordinates
     {
