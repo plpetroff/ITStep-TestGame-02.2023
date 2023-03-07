@@ -8,9 +8,9 @@ class Program
 
     private const int rightDirection = 0;
     private const int leftDirection = 1;
-    private const string symbol = "*";
+    private const string symbolOfGun = "*";
     private const string bullet = "|";
-    private const int sizeOfGun = 7;
+    private const int sizeOfGun = 5;
     private const int rowPositionOfGun = 20;
     private const int sizeOfEnemy = 5;
     private const string symbolOfEnemy = "#";
@@ -73,16 +73,14 @@ class Program
 
             Coordinates currentHead = gun.Last();
             Coordinates currenDirection = directions[direction];
-            Coordinates addedElement = new Coordinates(currentHead.Row + currenDirection.Row, currentHead.Col + currenDirection.Col);
+            Coordinates addedElement = new Coordinates(currentHead.Row + currenDirection.Row,                                                  currentHead.Col + currenDirection.Col);
 
             if (addedElement.Col < Console.BufferWidth)
             {
-
-
                 ClearPoint(removedElement);
                 gun.Remove(removedElement);
                 gun.Add(addedElement);
-                DrowPoint(addedElement, symbol);
+                DrowPoint(addedElement, symbolOfGun);
             }
 
 
@@ -93,22 +91,20 @@ class Program
 
             Coordinates removedElement = gun.Last();
 
-
             Coordinates currentHead = gun.First();
             Coordinates currenDirection = directions[direction];
-            addedElement = new Coordinates(currentHead.Row + currenDirection.Row, currentHead.Col + currenDirection.Col);
-
+            addedElement = new Coordinates(currentHead.Row + currenDirection.Row, 
+                                           currentHead.Col + currenDirection.Col);
 
 
             if (addedElement.Col >= 0)
             {
                 gun.Insert(0, addedElement);
-                DrowPoint(addedElement, symbol);
+                DrowPoint(addedElement, symbolOfGun);
                 ClearPoint(removedElement);
                 gun.Remove(removedElement);
 
             }
-
 
 
         }
@@ -136,7 +132,7 @@ class Program
         {
             Console.SetCursorPosition(item.Col, item.Row);
 
-            Console.Write(symbol);
+            Console.Write(symbolOfGun);
         }
     }
 
@@ -162,36 +158,31 @@ class Program
 
     static void GenerateEnemy(int level)
     {
-
         for (int i = 0; i < level; i++)
         {
-
             enemy = new List<Coordinates>();
             var enemyRow = rnd.Next(0, Console.BufferHeight / 4);
             var enemyCol = rnd.Next(5, Console.BufferWidth - 5);
 
-
             for (int j = 0; j < sizeOfEnemy; j++)
             {
-                enemy.Add(new Coordinates(enemyRow, enemyCol + j));
-                Console.SetCursorPosition(enemy[j].Col, enemy[j].Row);
-                Console.WriteLine(symbolOfEnemy);
+                enemy.Add(new Coordinates(enemyRow, enemyCol + j));                
             }
-
-
-
-
-            
-
+            foreach (var item in enemy)
+            {
+                Console.SetCursorPosition(item.Col, item.Row);
+                DrowPoint(item, symbolOfEnemy);
+            }
+                        
         }
 
     }
 
     static void Shoot()
     {
-        Coordinates midElementOfGun = gun.FirstOrDefault();
+        Coordinates midElementOfGun = gun[sizeOfGun/2];
 
-        for (int i = midElementOfGun.Row - 1; i > 0; i--)
+        for (int i = midElementOfGun.Row - 1; i >= 0; i--)
         {
 
             Console.SetCursorPosition(midElementOfGun.Col, i);
