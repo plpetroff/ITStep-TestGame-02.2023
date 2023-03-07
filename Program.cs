@@ -3,6 +3,7 @@
 class Program
 {
     private static List<Coordinates> gun;
+    private static List<Coordinates> enemy;
     private static Random rnd = new Random();
 
     private const int rightDirection = 0;
@@ -11,6 +12,9 @@ class Program
     private const string bullet = "|";
     private const int sizeOfGun = 7;
     private const int rowPositionOfGun = 20;
+    private const int sizeOfEnemy = 5;
+    private const string symbolOfEnemy = "#";
+    private const int level = 3;
 
 
     private static Coordinates[] directions = new Coordinates[]
@@ -26,10 +30,10 @@ class Program
         SetUpConsole();
         SetUpGun(sizeOfGun);
         DrowGun();
-        GenerateEnemy(2);
-        
+        GenerateEnemy(level);
 
-        int direction= leftDirection;
+
+        int direction = leftDirection;
 
         while (true)
         {
@@ -161,10 +165,23 @@ class Program
 
         for (int i = 0; i < level; i++)
         {
+
+            enemy = new List<Coordinates>();
             var enemyRow = rnd.Next(0, Console.BufferHeight / 4);
             var enemyCol = rnd.Next(5, Console.BufferWidth - 5);
-            Console.SetCursorPosition(enemyCol, enemyRow);
-            Console.WriteLine("###");
+
+
+            for (int j = 0; j < sizeOfEnemy; j++)
+            {
+                enemy.Add(new Coordinates(enemyRow, enemyCol + j));
+                Console.SetCursorPosition(enemy[j].Col, enemy[j].Row);
+                Console.WriteLine(symbolOfEnemy);
+            }
+
+
+
+
+            
 
         }
 
@@ -173,13 +190,13 @@ class Program
     static void Shoot()
     {
         Coordinates midElementOfGun = gun.FirstOrDefault();
-        
-        for (int i = midElementOfGun.Row-1; i > 0; i--)
-        {           
-            
-            Console.SetCursorPosition(midElementOfGun.Col, i );
+
+        for (int i = midElementOfGun.Row - 1; i > 0; i--)
+        {
+
+            Console.SetCursorPosition(midElementOfGun.Col, i);
             Console.WriteLine(bullet);
-            Console.SetCursorPosition(midElementOfGun.Col, i+1);
+            Console.SetCursorPosition(midElementOfGun.Col, i + 1);
             Console.Write(" ");
             Thread.Sleep(30);
 
