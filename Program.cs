@@ -3,7 +3,7 @@
 class Program
 {
     private static List<Coordinates> gun;
-    private static List<Coordinates> enemy;
+    private static Dictionary<int, List<Coordinates>> enemy;
     private static Random rnd = new Random();
 
     private const int rightDirection = 0;
@@ -73,7 +73,7 @@ class Program
 
             Coordinates currentHead = gun.Last();
             Coordinates currenDirection = directions[direction];
-            Coordinates addedElement = new Coordinates(currentHead.Row + currenDirection.Row,                                                  currentHead.Col + currenDirection.Col);
+            Coordinates addedElement = new Coordinates(currentHead.Row + currenDirection.Row, currentHead.Col + currenDirection.Col);
 
             if (addedElement.Col < Console.BufferWidth)
             {
@@ -93,7 +93,7 @@ class Program
 
             Coordinates currentHead = gun.First();
             Coordinates currenDirection = directions[direction];
-            addedElement = new Coordinates(currentHead.Row + currenDirection.Row, 
+            addedElement = new Coordinates(currentHead.Row + currenDirection.Row,
                                            currentHead.Col + currenDirection.Col);
 
 
@@ -122,7 +122,7 @@ class Program
     private static void DrowPoint(Coordinates el, string symbol)
     {
         Console.SetCursorPosition(el.Col, el.Row);
-        Console.WriteLine(symbol);
+        Console.Write(symbol);
     }
 
 
@@ -160,27 +160,38 @@ class Program
     {
         for (int i = 0; i < level; i++)
         {
-            enemy = new List<Coordinates>();
+            enemy = new Dictionary<int, List<Coordinates>>();
+            var currentEnemy = new List<Coordinates>();
+
             var enemyRow = rnd.Next(0, Console.BufferHeight / 4);
             var enemyCol = rnd.Next(5, Console.BufferWidth - 5);
 
-            for (int j = 0; j < sizeOfEnemy; j++)
+            for (int k = 0; k < level; k++)
             {
-                enemy.Add(new Coordinates(enemyRow, enemyCol + j));                
+                
+                for (int j = 0; j < sizeOfEnemy; j++)
+                {
+                    currentEnemy.Add(new Coordinates(enemyRow, enemyCol + j));
+                }
+
             }
-            foreach (var item in enemy)
+
+            enemy.Add(i, currentEnemy);
+
+
+            foreach (var item in currentEnemy)
             {
                 Console.SetCursorPosition(item.Col, item.Row);
                 DrowPoint(item, symbolOfEnemy);
             }
-                        
+
         }
 
     }
 
     static void Shoot()
     {
-        Coordinates midElementOfGun = gun[sizeOfGun/2];
+        Coordinates midElementOfGun = gun[sizeOfGun / 2];
 
         for (int i = midElementOfGun.Row - 1; i >= 0; i--)
         {
