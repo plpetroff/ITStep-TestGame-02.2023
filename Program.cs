@@ -3,7 +3,7 @@
 class Program
 {
     private static List<Coordinates> gun;
-    private static Dictionary<int, List<Coordinates>> enemy;
+    private static Dictionary<int, List<Coordinates>> enemies;
     private static Random rnd = new Random();
 
     private const int rightDirection = 0;
@@ -132,7 +132,7 @@ class Program
         {
             Console.SetCursorPosition(item.Col, item.Row);
             DrowPoint(item, symbolOfGun);
-            
+
         }
     }
 
@@ -158,25 +158,21 @@ class Program
 
     static void GenerateEnemy(int level)
     {
+        enemies = new Dictionary<int, List<Coordinates>>();
         for (int i = 0; i < level; i++)
         {
-            enemy = new Dictionary<int, List<Coordinates>>();
+
             var currentEnemy = new List<Coordinates>();
 
             var enemyRow = rnd.Next(0, Console.BufferHeight / 4);
             var enemyCol = rnd.Next(5, Console.BufferWidth - 5);
 
-            for (int k = 0; k < level; k++)
-            {                
-                for (int j = 0; j < sizeOfEnemy; j++)
-                {
-                    currentEnemy.Add(new Coordinates(enemyRow, enemyCol + j));
-                }
-
+            for (int j = 0; j < sizeOfEnemy; j++)
+            {
+                currentEnemy.Add(new Coordinates(enemyRow, enemyCol + j));
             }
 
-            enemy.Add(i, currentEnemy);
-
+            enemies.Add(i, currentEnemy);
 
             foreach (var item in currentEnemy)
             {
@@ -194,16 +190,15 @@ class Program
 
         for (int i = midElementOfGun.Row - 1; i >= 0; i--)
         {
-
             Console.SetCursorPosition(midElementOfGun.Col, i);
             Coordinates currentPositionOfBullet = new Coordinates(i, midElementOfGun.Col);
             DrowPoint(currentPositionOfBullet, bullet);
-            
+
             Console.SetCursorPosition(midElementOfGun.Col, i + 1);
             currentPositionOfBullet = new Coordinates(i + 1, midElementOfGun.Col);
             ClearPoint(currentPositionOfBullet);
-            Thread.Sleep(30);
 
+            Thread.Sleep(30);
         }
     }
 
