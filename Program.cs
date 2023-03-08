@@ -131,8 +131,8 @@ class Program
         foreach (var item in gun)
         {
             Console.SetCursorPosition(item.Col, item.Row);
-
-            Console.Write(symbolOfGun);
+            DrowPoint(item, symbolOfGun);
+            
         }
     }
 
@@ -167,8 +167,7 @@ class Program
             var enemyCol = rnd.Next(5, Console.BufferWidth - 5);
 
             for (int k = 0; k < level; k++)
-            {
-                
+            {                
                 for (int j = 0; j < sizeOfEnemy; j++)
                 {
                     currentEnemy.Add(new Coordinates(enemyRow, enemyCol + j));
@@ -197,9 +196,12 @@ class Program
         {
 
             Console.SetCursorPosition(midElementOfGun.Col, i);
-            Console.WriteLine(bullet);
+            Coordinates currentPositionOfBullet = new Coordinates(i, midElementOfGun.Col);
+            DrowPoint(currentPositionOfBullet, bullet);
+            
             Console.SetCursorPosition(midElementOfGun.Col, i + 1);
-            Console.Write(" ");
+            currentPositionOfBullet = new Coordinates(i + 1, midElementOfGun.Col);
+            ClearPoint(currentPositionOfBullet);
             Thread.Sleep(30);
 
         }
