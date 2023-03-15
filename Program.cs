@@ -194,6 +194,18 @@ class Program
             Coordinates currentPositionOfBullet = new Coordinates(i, midElementOfGun.Col);
             DrowPoint(currentPositionOfBullet, bullet);
 
+            foreach (var enemy in enemies)
+            {
+                foreach (var coord in enemy.Value)
+                {
+                    if (currentPositionOfBullet.Row == coord.Row && currentPositionOfBullet.Col == coord.Col )
+                    {
+                        Console.Write("@");
+                    }
+                }
+
+            }
+
             Console.SetCursorPosition(midElementOfGun.Col, i + 1);
             currentPositionOfBullet = new Coordinates(i + 1, midElementOfGun.Col);
             ClearPoint(currentPositionOfBullet);
@@ -212,5 +224,10 @@ class Program
 
         public int Row { get; set; }
         public int Col { get; set; }
+
+        public override bool Equals(object? obj)
+        {
+            return base.Equals(obj);
+        }
     }
 }
