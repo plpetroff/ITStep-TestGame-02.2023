@@ -6,7 +6,7 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    internal class GameObject
+    public class GameObject
     {
         public GameObject(string gameObjectBody, int row, int col)
         {

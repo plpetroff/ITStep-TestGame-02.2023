@@ -6,7 +6,7 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    internal class Ship: GameObject
+    public class Ship: GameObject
     {
         public const string playerBody = "/!\\";
 

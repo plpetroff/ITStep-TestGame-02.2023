@@ -1,5 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+using ITStep_TestGame_02._2023;
+
 class Program
 {
     private static List<Coordinates> gun;
@@ -139,6 +141,9 @@ class Program
 
     static void SetUpGun(int size)
     {
+        Ship ship = new Ship("test", 15, 20);
+        ship.Drow();
+
         gun = new List<Coordinates>();
         for (int i = Console.BufferWidth / 2; i < Console.BufferWidth / 2 + size; i++)
         {

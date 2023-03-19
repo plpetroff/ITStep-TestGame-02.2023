@@ -6,7 +6,7 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    internal class Enemy : GameObject
+    public class Enemy : GameObject
     {
         public const string enemyBody = "\\!/";
 

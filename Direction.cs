@@ -6,7 +6,7 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    internal enum Direction
+    public enum Direction
     {
         Left,
         Right,
