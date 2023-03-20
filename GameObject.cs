@@ -43,7 +43,7 @@
             }
         }
 
-        public virtual void Drow()
+        public virtual void Draw()
         {
             Console.SetCursorPosition(Col, Row);
             Console.Write(GameObjectBody);

@@ -34,6 +34,9 @@ class Program
         while (true)
         {
             InitGame();
+
+            Console.WriteLine("Press Enter");
+            game.Draw();
         }
         
         SetUpConsole();
@@ -75,10 +78,10 @@ class Program
 
     private static void InitGame()
     {
-        int width = 80;
-        int height = 35;
+        int row = 80;
+        int col = 35;
 
-        game = new Game();
+        game = new Game(row, col);
     }
 
     static void MoveGun(int direction)
@@ -155,9 +158,9 @@ class Program
 
     static void SetUpGun(int size)
     {
-        game = new Game();
+        game = new Game(50, 50);
         Ship ship = new Ship(game, "test", 10, 20);
-        ship.Drow();
+        ship.Draw();
 
         gun = new List<Coordinates>();
         for (int i = Console.BufferWidth / 2; i < Console.BufferWidth / 2 + size; i++)

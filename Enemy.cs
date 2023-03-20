@@ -16,7 +16,7 @@
             
         }
 
-        public override void Drow()
+        public override void Draw()
         {
             Console.SetCursorPosition(Col, Row);
             Console.WriteLine(enemyBody);
