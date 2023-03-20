@@ -10,11 +10,9 @@
     {
         public const string playerBody = "/!\\";
 
-        public Ship(string playerBody, int row, int col) : base(playerBody, row, col)   
+        public Ship(Game game, string playerBody, int row, int col) : base(game, playerBody, row, col)   
         {
-            this.GameObjectBody = playerBody;
-            this.Row = row;
-            this.Col = col;
+            
 
         }
 

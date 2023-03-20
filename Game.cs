@@ -9,6 +9,11 @@
     public class Game
     {
 
+        public Game()
+        {
+
+            Ship = new Ship(this, Ship.playerBody, 20, 20);
+        }
         public Ship Ship { get; set; }
         public IList<Enemy> Enemies { get; set; }
 

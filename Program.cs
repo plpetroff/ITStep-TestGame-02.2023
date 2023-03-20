@@ -4,6 +4,8 @@ using ITStep_TestGame_02._2023;
 
 class Program
 {
+    private static Game game;
+
     private static List<Coordinates> gun;
     private static Dictionary<int, List<Coordinates>> enemies;
     private static Random rnd = new Random();
@@ -29,6 +31,11 @@ class Program
 
     static void Main(string[] args)
     {
+        while (true)
+        {
+            InitGame();
+        }
+        
         SetUpConsole();
         SetUpGun(sizeOfGun);
         DrowGun();
@@ -66,6 +73,13 @@ class Program
 
     }
 
+    private static void InitGame()
+    {
+        int width = 80;
+        int height = 35;
+
+        game = new Game();
+    }
 
     static void MoveGun(int direction)
     {
@@ -141,7 +155,8 @@ class Program
 
     static void SetUpGun(int size)
     {
-        Ship ship = new Ship("test", 15, 20);
+        game = new Game();
+        Ship ship = new Ship(game, "test", 10, 20);
         ship.Drow();
 
         gun = new List<Coordinates>();
@@ -203,7 +218,7 @@ class Program
             {
                 foreach (var coord in enemy.Value)
                 {
-                    if (currentPositionOfBullet.Row == coord.Row && currentPositionOfBullet.Col == coord.Col )
+                    if (currentPositionOfBullet.Row == coord.Row && currentPositionOfBullet.Col == coord.Col)
                     {
                         Console.Write("@");
                     }

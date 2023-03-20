@@ -10,11 +10,10 @@
     {
         public const string enemyBody = "\\!/";
 
-        public Enemy(string enemyBody, int row, int col) : base(enemyBody, row, col)
+        public Enemy(Game game, string enemyBody, int row, int col) : base(game, enemyBody, row, col)
         {
-            this.GameObjectBody = enemyBody;
-            this.Row = row;
-            this.Col = col;
+
+            
         }
 
         public override void Drow()

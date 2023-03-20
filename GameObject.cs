@@ -8,13 +8,15 @@
 
     public class GameObject
     {
-        public GameObject(string gameObjectBody, int row, int col)
+        public GameObject(Game game, string gameObjectBody, int row, int col)
         {
+            this.Game = game;
             this.GameObjectBody = gameObjectBody;
             this.Row = row; 
             this.Col = col;
         }
 
+        public Game Game { get; set; }
         public string GameObjectBody { get; set; }
         public int Row { get; set; }
         public int Col { get; set; }
