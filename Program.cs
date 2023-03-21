@@ -6,8 +6,8 @@ class Program
 {
     private static Game game;
 
-    private static List<Coordinates> gun;
-    private static Dictionary<int, List<Coordinates>> enemies;
+    //private static List<Coordinates> gun;
+    //private static Dictionary<int, List<Coordinates>> enemies;
     private static Random rnd = new Random();
 
     private const int rightDirection = 0;
@@ -21,11 +21,11 @@ class Program
     private const int level = 3;
 
 
-    private static Coordinates[] directions = new Coordinates[]
-    {
-        new Coordinates(0,1), // rightDirection
-        new Coordinates(0,-1), // leftDirection
-    };
+    //private static Coordinates[] directions = new Coordinates[]
+    //{
+    //    new Coordinates(0,1), // rightDirection
+    //    new Coordinates(0,-1), // leftDirection
+    //};
 
 
 
@@ -39,10 +39,10 @@ class Program
             game.Draw();
         }
         
-        SetUpConsole();
-        SetUpGun(sizeOfGun);
-        DrowGun();
-        GenerateEnemy(level);
+        //SetUpConsole();
+        //SetUpGun(sizeOfGun);
+        //DrowGun();
+        //GenerateEnemy(level);
 
 
         int direction = leftDirection;
@@ -63,14 +63,14 @@ class Program
                 }
                 if (key == ConsoleKey.Spacebar)
                 {
-                    Shoot();
+                    //Shoot();
                 }
             }
 
 
-            MoveGun(direction);
+            //MoveGun(direction);
 
-            Thread.Sleep(90);
+            Thread.Sleep(100);
         }
 
 
@@ -78,179 +78,179 @@ class Program
 
     private static void InitGame()
     {
-        int row = 80;
+        int row = 30;
         int col = 35;
 
         game = new Game(row, col);
     }
 
-    static void MoveGun(int direction)
-    {
-        if (direction == rightDirection)
-        {
-            Coordinates removedElement = gun.First();
+    //static void MoveGun(int direction)
+    //{
+    //    if (direction == rightDirection)
+    //    {
+    //        Coordinates removedElement = gun.First();
 
-            Coordinates currentHead = gun.Last();
-            Coordinates currenDirection = directions[direction];
-            Coordinates addedElement = new Coordinates(currentHead.Row + currenDirection.Row, currentHead.Col + currenDirection.Col);
+    //        Coordinates currentHead = gun.Last();
+    //        Coordinates currenDirection = directions[direction];
+    //        Coordinates addedElement = new Coordinates(currentHead.Row + currenDirection.Row, currentHead.Col + currenDirection.Col);
 
-            if (addedElement.Col < Console.BufferWidth)
-            {
-                ClearPoint(removedElement);
-                gun.Remove(removedElement);
-                gun.Add(addedElement);
-                DrowPoint(addedElement, symbolOfGun);
-            }
-
-
-        }
-        else if (direction == leftDirection)
-        {
-            Coordinates addedElement;
-
-            Coordinates removedElement = gun.Last();
-
-            Coordinates currentHead = gun.First();
-            Coordinates currenDirection = directions[direction];
-            addedElement = new Coordinates(currentHead.Row + currenDirection.Row,
-                                           currentHead.Col + currenDirection.Col);
+    //        if (addedElement.Col < Console.BufferWidth)
+    //        {
+    //            ClearPoint(removedElement);
+    //            gun.Remove(removedElement);
+    //            gun.Add(addedElement);
+    //            DrowPoint(addedElement, symbolOfGun);
+    //        }
 
 
-            if (addedElement.Col >= 0)
-            {
-                gun.Insert(0, addedElement);
-                DrowPoint(addedElement, symbolOfGun);
-                ClearPoint(removedElement);
-                gun.Remove(removedElement);
+    //    }
+    //    else if (direction == leftDirection)
+    //    {
+    //        Coordinates addedElement;
 
-            }
+    //        Coordinates removedElement = gun.Last();
 
-
-        }
-
-
-    }
-
-    private static void ClearPoint(Coordinates el)
-    {
-        Console.SetCursorPosition(el.Col, el.Row);
-        Console.Write(" ");
-    }
+    //        Coordinates currentHead = gun.First();
+    //        Coordinates currenDirection = directions[direction];
+    //        addedElement = new Coordinates(currentHead.Row + currenDirection.Row,
+    //                                       currentHead.Col + currenDirection.Col);
 
 
-    private static void DrowPoint(Coordinates el, string symbol)
-    {
-        Console.SetCursorPosition(el.Col, el.Row);
-        Console.Write(symbol);
-    }
+    //        if (addedElement.Col >= 0)
+    //        {
+    //            gun.Insert(0, addedElement);
+    //            DrowPoint(addedElement, symbolOfGun);
+    //            ClearPoint(removedElement);
+    //            gun.Remove(removedElement);
+
+    //        }
 
 
-    static void DrowGun()
-    {
-        foreach (var item in gun)
-        {
-            Console.SetCursorPosition(item.Col, item.Row);
-            DrowPoint(item, symbolOfGun);
-
-        }
-    }
+    //    }
 
 
-    static void SetUpGun(int size)
-    {
-        game = new Game(50, 50);
-        Ship ship = new Ship(game, "test", 10, 20);
-        ship.Draw();
+    //}
 
-        gun = new List<Coordinates>();
-        for (int i = Console.BufferWidth / 2; i < Console.BufferWidth / 2 + size; i++)
-        {
-            gun.Add(new Coordinates(rowPositionOfGun, i));
-        }
-    }
+    //private static void ClearPoint(Coordinates el)
+    //{
+    //    Console.SetCursorPosition(el.Col, el.Row);
+    //    Console.Write(" ");
+    //}
 
 
-    static void SetUpConsole()
-    {
-        Console.Clear();
-        Console.CursorVisible = false;
-        Console.BufferHeight = Console.WindowHeight;
-        Console.BufferWidth = Console.WindowWidth;
+    //private static void DrowPoint(Coordinates el, string symbol)
+    //{
+    //    Console.SetCursorPosition(el.Col, el.Row);
+    //    Console.Write(symbol);
+    //}
 
-    }
 
-    static void GenerateEnemy(int level)
-    {
-        enemies = new Dictionary<int, List<Coordinates>>();
-        for (int i = 0; i < level; i++)
-        {
+    //static void DrowGun()
+    //{
+    //    foreach (var item in gun)
+    //    {
+    //        Console.SetCursorPosition(item.Col, item.Row);
+    //        DrowPoint(item, symbolOfGun);
 
-            var currentEnemy = new List<Coordinates>();
+    //    }
+    //}
 
-            var enemyRow = rnd.Next(0, Console.BufferHeight / 4);
-            var enemyCol = rnd.Next(5, Console.BufferWidth - 5);
 
-            for (int j = 0; j < sizeOfEnemy; j++)
-            {
-                currentEnemy.Add(new Coordinates(enemyRow, enemyCol + j));
-            }
+    //static void SetUpGun(int size)
+    //{
+    //    game = new Game(50, 50);
+    //    Ship ship = new Ship(game, "test", 10, 20);
+    //    ship.Draw();
 
-            enemies.Add(i, currentEnemy);
+    //    gun = new List<Coordinates>();
+    //    for (int i = Console.BufferWidth / 2; i < Console.BufferWidth / 2 + size; i++)
+    //    {
+    //        gun.Add(new Coordinates(rowPositionOfGun, i));
+    //    }
+    //}
 
-            foreach (var item in currentEnemy)
-            {
-                Console.SetCursorPosition(item.Col, item.Row);
-                DrowPoint(item, symbolOfEnemy);
-            }
 
-        }
+    //static void SetUpConsole()
+    //{
+    //    Console.Clear();
+    //    Console.CursorVisible = false;
+    //    Console.BufferHeight = Console.WindowHeight;
+    //    Console.BufferWidth = Console.WindowWidth;
 
-    }
+    //}
 
-    static void Shoot()
-    {
-        Coordinates midElementOfGun = gun[sizeOfGun / 2];
+    //static void GenerateEnemy(int level)
+    //{
+    //    enemies = new Dictionary<int, List<Coordinates>>();
+    //    for (int i = 0; i < level; i++)
+    //    {
 
-        for (int i = midElementOfGun.Row - 1; i >= 0; i--)
-        {
-            Console.SetCursorPosition(midElementOfGun.Col, i);
-            Coordinates currentPositionOfBullet = new Coordinates(i, midElementOfGun.Col);
-            DrowPoint(currentPositionOfBullet, bullet);
+    //        var currentEnemy = new List<Coordinates>();
 
-            foreach (var enemy in enemies)
-            {
-                foreach (var coord in enemy.Value)
-                {
-                    if (currentPositionOfBullet.Row == coord.Row && currentPositionOfBullet.Col == coord.Col)
-                    {
-                        Console.Write("@");
-                    }
-                }
+    //        var enemyRow = rnd.Next(0, Console.BufferHeight / 4);
+    //        var enemyCol = rnd.Next(5, Console.BufferWidth - 5);
 
-            }
+    //        for (int j = 0; j < sizeOfEnemy; j++)
+    //        {
+    //            currentEnemy.Add(new Coordinates(enemyRow, enemyCol + j));
+    //        }
 
-            Console.SetCursorPosition(midElementOfGun.Col, i + 1);
-            currentPositionOfBullet = new Coordinates(i + 1, midElementOfGun.Col);
-            ClearPoint(currentPositionOfBullet);
+    //        enemies.Add(i, currentEnemy);
 
-            Thread.Sleep(30);
-        }
-    }
+    //        foreach (var item in currentEnemy)
+    //        {
+    //            Console.SetCursorPosition(item.Col, item.Row);
+    //            DrowPoint(item, symbolOfEnemy);
+    //        }
 
-    class Coordinates
-    {
-        public Coordinates(int row, int col)
-        {
-            Row = row;
-            Col = col;
-        }
+    //    }
 
-        public int Row { get; set; }
-        public int Col { get; set; }
+    //}
 
-        public override bool Equals(object? obj)
-        {
-            return base.Equals(obj);
-        }
-    }
+    //static void Shoot()
+    //{
+    //    Coordinates midElementOfGun = gun[sizeOfGun / 2];
+
+    //    for (int i = midElementOfGun.Row - 1; i >= 0; i--)
+    //    {
+    //        Console.SetCursorPosition(midElementOfGun.Col, i);
+    //        Coordinates currentPositionOfBullet = new Coordinates(i, midElementOfGun.Col);
+    //        DrowPoint(currentPositionOfBullet, bullet);
+
+    //        foreach (var enemy in enemies)
+    //        {
+    //            foreach (var coord in enemy.Value)
+    //            {
+    //                if (currentPositionOfBullet.Row == coord.Row && currentPositionOfBullet.Col == coord.Col)
+    //                {
+    //                    Console.Write("@");
+    //                }
+    //            }
+
+    //        }
+
+    //        Console.SetCursorPosition(midElementOfGun.Col, i + 1);
+    //        currentPositionOfBullet = new Coordinates(i + 1, midElementOfGun.Col);
+    //        ClearPoint(currentPositionOfBullet);
+
+    //        Thread.Sleep(30);
+    //    }
+    //}
+
+    //class Coordinates
+    //{
+    //    public Coordinates(int row, int col)
+    //    {
+    //        Row = row;
+    //        Col = col;
+    //    }
+
+    //    public int Row { get; set; }
+    //    public int Col { get; set; }
+
+    //    public override bool Equals(object? obj)
+    //    {
+    //        return base.Equals(obj);
+    //    }
+    //}
 }
