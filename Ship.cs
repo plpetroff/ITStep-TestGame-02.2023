@@ -21,5 +21,31 @@
             Console.SetCursorPosition(Col, Row);
             Console.WriteLine(playerBody); 
         }
+
+        public override void Move(Direction direction)
+        {
+            switch (direction)
+            {
+                case Direction.Left:
+                    Col = Math.Max(Col - 1, Game.Map.BeginPoint);
+                    break;
+                case Direction.Right:
+                    Col = Math.Min(Col+1, Game.Map.BeginPoint + Game.Map.Col - Length );
+                    break;
+                case Direction.Up:
+                    Row = Math.Max(Row - 1, Game.Map.BeginPoint);
+                    break;
+                case Direction.Down:
+                    Row = Math.Min(Row +1, Game.Map.BeginPoint + Game.Map.Row - 1 );
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public void Fire(Direction direction)
+        {
+
+        }
     }
 }

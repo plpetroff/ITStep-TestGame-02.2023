@@ -16,6 +16,7 @@
         }
         public Ship Ship { get; set; }
         public IList<Enemy> Enemies { get; set; }
+        public IList<Bullet> Bulets { get; set; }
         public Map Map { get; set; }
 
 
@@ -32,5 +33,14 @@
                 Ship.Draw();
             }
         }
+
+        public void Update()
+        {
+            if (true)
+            {
+
+            }
+        }
+
     }
 }

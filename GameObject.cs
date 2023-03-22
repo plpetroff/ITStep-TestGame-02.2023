@@ -18,11 +18,12 @@
 
         public Game Game { get; set; }
         public string GameObjectBody { get; set; }
+        public int Length { get { return GameObjectBody.Length; } }
         public int Row { get; set; }
         public int Col { get; set; }
 
 
-        public void Move(Direction direction)
+        public virtual void Move(Direction direction)
         {
             switch (direction)
             {

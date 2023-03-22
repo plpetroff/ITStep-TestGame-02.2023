@@ -37,52 +37,100 @@ class Program
 
             Console.WriteLine("Press Enter");
             game.Draw();
+
+            while (game.IsPlaying)
+            {
+                ReadInput();
+
+                game.Update();
+            }
+
+
+
+
         }
-        
+
         //SetUpConsole();
         //SetUpGun(sizeOfGun);
         //DrowGun();
         //GenerateEnemy(level);
 
 
-        int direction = leftDirection;
+        //int direction = leftDirection;
 
-        while (true)
+        //while (true)
+        //{
+        //    if (Console.KeyAvailable)
+        //    {
+        //        ConsoleKey key = Console.ReadKey().Key;
+
+        //        if (key == ConsoleKey.RightArrow && direction != rightDirection)
+        //        {
+        //            direction = rightDirection;
+        //        }
+        //        if (key == ConsoleKey.LeftArrow && direction != leftDirection)
+        //        {
+        //            direction = leftDirection;
+        //        }
+        //        if (key == ConsoleKey.Spacebar)
+        //        {
+        //            //Shoot();
+        //        }
+        //    }
+
+
+        //    //MoveGun(direction);
+
+        //    Thread.Sleep(100);
+        //}
+
+
+    }
+
+    private static void ReadInput()
+    {
+        while (game.Ship != null && Console.KeyAvailable)
         {
-            if (Console.KeyAvailable)
+            ConsoleKey key = Console.ReadKey().Key;
+
+            switch (key)
             {
-                ConsoleKey key = Console.ReadKey().Key;
+                case ConsoleKey.LeftArrow:
+                    game.Ship.Move(Direction.Left);
+                    break;
+                case ConsoleKey.RightArrow:
+                    game.Ship.Move(Direction.Right);
+                    break;
+                case ConsoleKey.UpArrow:
+                    game.Ship.Move(Direction.Up);
+                    break;
+                case ConsoleKey.DownArrow:
+                    game.Ship.Move(Direction.Down);
+                    break;
+                case ConsoleKey.Backspace:
+                    game.Ship.Fire(Direction.Up);
+                    break;
 
-                if (key == ConsoleKey.RightArrow && direction != rightDirection)
-                {
-                    direction = rightDirection;
-                }
-                if (key == ConsoleKey.LeftArrow && direction != leftDirection)
-                {
-                    direction = leftDirection;
-                }
-                if (key == ConsoleKey.Spacebar)
-                {
-                    //Shoot();
-                }
+                default:
+                    break;
             }
-
-
-            //MoveGun(direction);
-
-            Thread.Sleep(100);
         }
-
 
     }
 
     private static void InitGame()
     {
-        int row = 30;
-        int col = 35;
+        int row = 22;
+        int col = 60;
 
         game = new Game(row, col);
     }
+
+
+
+
+
+
 
     //static void MoveGun(int direction)
     //{

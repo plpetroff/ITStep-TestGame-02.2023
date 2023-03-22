@@ -21,30 +21,30 @@
 
         public void Draw()
         {
-            Console.SetCursorPosition(0,0);
+            Console.SetCursorPosition(0, 0);
             Console.Write("*");
             for (int i = 0; i < Col; i++)
             {
-                Console.Write("=");
+                Console.Write("-");
             }
-            Console.Write("*");
+            Console.Write("+");
 
             for (int i = BeginPoint; i < BeginPoint + Row; i++)
             {
                 Console.SetCursorPosition(0, i);
-                Console.Write("\"");
+                Console.Write("|");
                 Console.SetCursorPosition(BeginPoint + Col, i);
-                Console.Write("\"");
+                Console.Write("|");
             }
 
             Console.SetCursorPosition(0, BeginPoint + Row);
             Console.Write("*");
             for (int i = 0; i < Col; i++)
             {
-                Console.Write("=");
-                Console.Write("*");
-            }
+                Console.Write("-");
 
+            }
+            Console.Write("+");
         }
     }
 }
