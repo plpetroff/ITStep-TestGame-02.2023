@@ -67,6 +67,16 @@
             Console.Write(new String(' ', Length));
         }
 
+        public virtual void Redraw()
+        {
+            if (Row != LastRow || Col != LastCol)
+            {
+                Draw();
+                LastRow = Row;
+                LastCol = Col;
+            }
+        }
+
         public bool IsInMap
         {
             get { return Row >= Game.Map.BeginPoint && Row <= Game.Map.Row - Game.Map.BeginPoint; }

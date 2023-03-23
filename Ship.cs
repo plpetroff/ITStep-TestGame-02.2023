@@ -51,6 +51,8 @@
                 Console.Write(new String(' ', Length));
             }
         }
+
+
         public void Fire(Direction direction)
         {
 

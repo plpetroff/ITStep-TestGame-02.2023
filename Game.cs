@@ -16,6 +16,8 @@
         {
             Map = new Map(mapRow, mapCol);
             Ship = new Ship(this, Ship.playerBody, 20, 20);
+            random = new Random();
+            Enemies = new List<Enemy>();
         }
         public Ship Ship { get; set; }
         public IList<Enemy> Enemies { get; set; }
