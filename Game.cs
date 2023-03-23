@@ -53,6 +53,7 @@
             {
                 Ship.Update();
                 Ship.Clear();
+                Ship.Redraw();
 
             }
         }
