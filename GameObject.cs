@@ -14,6 +14,9 @@
             this.GameObjectBody = gameObjectBody;
             this.Row = row; 
             this.Col = col;
+            this.LastRow = row;
+            this.LastCol = col;
+
         }
 
         public Game Game { get; set; }
@@ -21,6 +24,9 @@
         public int Length { get { return GameObjectBody.Length; } }
         public int Row { get; set; }
         public int Col { get; set; }
+        public int LastRow { get; set; }
+        public int LastCol { get; set; }
+
 
 
         public virtual void Move(Direction direction)
@@ -48,6 +54,22 @@
         {
             Console.SetCursorPosition(Col, Row);
             Console.Write(GameObjectBody);
+        }
+
+        public virtual void Update()
+        {
+
+        }
+
+        public virtual void Clear()
+        {
+            Console.SetCursorPosition(Col, Row);
+            Console.Write(new String(' ', Length));
+        }
+
+        public bool IsInMap
+        {
+            get { return Row >= Game.Map.BeginPoint && Row <= Game.Map.Row - Game.Map.BeginPoint; }
         }
     }
 }

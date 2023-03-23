@@ -8,7 +8,10 @@
 
     public class Game
     {
+        private const int spawnInterval = 3000;
+        private DateTime lastSpawn;
 
+        private Random random;
         public Game(int mapRow, int mapCol)
         {
             Map = new Map(mapRow, mapCol);
@@ -36,11 +39,30 @@
 
         public void Update()
         {
-            if (true)
+            if (Ship != null)
             {
+                if ((DateTime.Now -  lastSpawn).TotalMilliseconds > spawnInterval)
+                {
+                    SpawnEnemy();
+                }
+            }
+
+            if (Ship != null)
+            {
+                Ship.Update();
+                Ship.Clear();
 
             }
         }
 
+        private void SpawnEnemy()
+        {
+            int x = random.Next(Map.Col - 2*Map.BeginPoint) + Map.BeginPoint;
+            var enemy = new Enemy(this, "\\!/", Map.BeginPoint, x);
+            enemy.Draw();
+            Enemies.Add(enemy);
+
+            lastSpawn = DateTime.Now;
+        }
     }
 }

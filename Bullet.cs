@@ -9,9 +9,24 @@
     public class Bullet : GameObject
     {
         private Direction direction;
-        public Bullet(Game game, string gameObjectBody, int row, int col) : base(game, "|", row, col)
+        public Bullet(Game game, int row, int col, Direction direction) : base(game, "|", row, col)
         {
+            this.direction = direction;
+            Draw();
+        }
 
+        public override void Update()
+        {
+            Move(Direction.Up);
+            if (IsInMap)
+            {
+                base.Update();
+            }
+
+        }
+        public override void Draw()
+        {
+            base.Draw();
         }
     }
 }

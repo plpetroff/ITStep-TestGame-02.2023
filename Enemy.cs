@@ -9,17 +9,30 @@
     public class Enemy : GameObject
     {
         public const string enemyBody = "\\!/";
+        private const int moveInterval = 500;
+
+        private DateTime lastMove;
 
         public Enemy(Game game, string enemyBody, int row, int col) : base(game, enemyBody, row, col)
         {
 
-            
+            lastMove = DateTime.Now;
         }
 
         public override void Draw()
         {
             Console.SetCursorPosition(Col, Row);
             Console.WriteLine(enemyBody);
+        }
+
+        public override void Update()
+        {
+            if ((DateTime.Now - lastMove).Milliseconds > moveInterval)
+            {
+                Move(Direction.Down);
+                base.Update();
+                lastMove = DateTime.Now;
+            }
         }
     }
 }

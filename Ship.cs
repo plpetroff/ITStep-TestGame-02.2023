@@ -43,6 +43,14 @@
             }
         }
 
+        public override void Clear()
+        {
+            if (Row != LastRow || Col != LastRow)
+            {
+                Console.SetCursorPosition(LastRow, LastRow);
+                Console.Write(new String(' ', Length));
+            }
+        }
         public void Fire(Direction direction)
         {
 
