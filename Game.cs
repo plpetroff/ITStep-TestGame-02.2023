@@ -15,7 +15,7 @@
         public Game(int mapRow, int mapCol)
         {
             Map = new Map(mapRow, mapCol);
-            Ship = new Ship(this, Ship.playerBody, 20, 20);
+            Ship = new Ship(this, Ship.playerBody, 21, 21);
             random = new Random();
             Enemies = new List<Enemy>();
         }

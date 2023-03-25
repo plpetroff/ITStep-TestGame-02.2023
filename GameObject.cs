@@ -14,8 +14,8 @@
             this.GameObjectBody = gameObjectBody;
             this.Row = row; 
             this.Col = col;
-            this.LastRow = row;
-            this.LastCol = col;
+            //this.LastRow = row;
+            //this.LastCol = col;
 
         }
 
@@ -63,7 +63,7 @@
 
         public virtual void Clear()
         {
-            Console.SetCursorPosition(Col, Row);
+            Console.SetCursorPosition(LastCol, Row);
             Console.Write(new String(' ', Length));
         }
 

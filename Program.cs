@@ -10,15 +10,15 @@ class Program
     //private static Dictionary<int, List<Coordinates>> enemies;
     private static Random rnd = new Random();
 
-    private const int rightDirection = 0;
-    private const int leftDirection = 1;
-    private const string symbolOfGun = "*";
-    private const string bullet = "|";
-    private const int sizeOfGun = 5;
-    private const int rowPositionOfGun = 20;
-    private const int sizeOfEnemy = 5;
-    private const string symbolOfEnemy = "#";
-    private const int level = 3;
+    //private const int rightDirection = 0;
+    //private const int leftDirection = 1;
+    //private const string symbolOfGun = "*";
+    //private const string bullet = "|";
+    //private const int sizeOfGun = 5;
+    //private const int rowPositionOfGun = 20;
+    //private const int sizeOfEnemy = 5;
+    //private const string symbolOfEnemy = "#";
+    //private const int level = 3;
 
 
     //private static Coordinates[] directions = new Coordinates[]
@@ -86,7 +86,13 @@ class Program
 
 
     }
+    private static void InitGame()
+    {
+        int row = 22;
+        int col = 60;
 
+        game = new Game(row, col);
+    }
     private static void ReadInput()
     {
         while (game.Ship != null && Console.KeyAvailable)
@@ -118,13 +124,7 @@ class Program
 
     }
 
-    private static void InitGame()
-    {
-        int row = 22;
-        int col = 60;
 
-        game = new Game(row, col);
-    }
 
 
 

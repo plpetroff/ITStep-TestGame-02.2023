@@ -12,10 +12,12 @@
 
         public Ship(Game game, string playerBody, int row, int col) : base(game, playerBody, row, col)   
         {
-            
+            //this.LastRow = row;
+            //this.LastCol = col;
 
         }
 
+        
         public override void Draw()
         {
             Console.SetCursorPosition(Col, Row);
@@ -45,9 +47,10 @@
 
         public override void Clear()
         {
-            if (Row != LastRow || Col != LastRow)
+            if (Row != LastRow || Col != LastCol)
             {
-                Console.SetCursorPosition(LastRow, LastRow);
+                Console.SetCursorPosition(LastCol, LastRow);
+                
                 Console.Write(new String(' ', Length));
             }
         }
