@@ -14,8 +14,8 @@
             this.GameObjectBody = gameObjectBody;
             this.Row = row; 
             this.Col = col;
-            //this.LastRow = row;
-            //this.LastCol = col;
+            this.LastRow = row;
+            this.LastCol = col;
 
         }
 
