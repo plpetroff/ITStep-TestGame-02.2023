@@ -113,7 +113,7 @@ class Program
                 case ConsoleKey.DownArrow:
                     game.Ship.Move(Direction.Down);
                     break;
-                case ConsoleKey.Backspace:
+                case ConsoleKey.Spacebar:
                     game.Ship.Fire(Direction.Up);
                     break;
 

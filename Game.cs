@@ -16,12 +16,13 @@
         {
             Map = new Map(mapRow, mapCol);
             Ship = new Ship(this, Ship.playerBody, 21, 21);
+            Bullets = new List<Bullet>();
             random = new Random();
             Enemies = new List<Enemy>();
         }
         public Ship Ship { get; set; }
         public IList<Enemy> Enemies { get; set; }
-        public IList<Bullet> Bulets { get; set; }
+        public IList<Bullet> Bullets { get; set; }
         public Map Map { get; set; }
 
 
@@ -54,6 +55,15 @@
                 Ship.Update();
                 Ship.Clear();
                 Ship.Redraw();
+
+            }
+
+            for (int i = 0; i < Bullets.Count; i++)
+            {
+                Bullets[i].Update();
+                Bullets[i].Clear();
+
+                Bullets[i].Redraw();
 
             }
         }
