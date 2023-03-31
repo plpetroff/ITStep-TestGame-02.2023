@@ -63,7 +63,7 @@
 
         public virtual void Clear()
         {
-            Console.SetCursorPosition(LastCol, Row);
+            Console.SetCursorPosition(LastCol, LastRow);
             Console.Write(new String(' ', Length));
         }
 
@@ -81,5 +81,10 @@
         {
             get { return Row >= Game.Map.BeginPoint && Row <= Game.Map.Row - Game.Map.BeginPoint; }
         }
+
+        public bool IsAtCoordinates(int row, int col)
+        {
+            return row == Row && col >= Col && col < Col + Length;
+        } 
     }
 }

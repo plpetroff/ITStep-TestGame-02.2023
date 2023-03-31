@@ -44,10 +44,44 @@
         {
             if (Ship != null)
             {
-                if ((DateTime.Now -  lastSpawn).TotalMilliseconds > spawnInterval)
+                if ((DateTime.Now - lastSpawn).TotalMilliseconds > spawnInterval)
                 {
                     SpawnEnemy();
                 }
+            }
+
+
+
+            for (int b = 0; b < Bullets.Count; b++)
+            {
+                Bullets[b].Update();
+                Bullets[b].Clear();
+
+                if (Bullets[b].IsInMap)
+                {
+                    for (int e = 0; e < Enemies.Count; e++)
+                    {   
+                        if (Enemies[e].IsAtCoordinates(Bullets[b].Row, Bullets[b].Col) ||
+                            Enemies[e].IsAtCoordinates(Bullets[b].LastRow, Bullets[b].LastCol))
+                        {
+                             Console.SetCursorPosition(Enemies[e].Col-1, Enemies[e].Row+2);
+                            Console.Write("@");
+                            Enemies.RemoveAt(e);
+                            Bullets.RemoveAt(b);
+                        }
+                        else
+                        {
+                            Bullets[b].Redraw();
+                        }
+                        break;
+                            
+                    }
+                    
+                }
+                else
+                {
+                    Bullets.RemoveAt(b);
+                }               
             }
 
             if (Ship != null)
@@ -58,19 +92,11 @@
 
             }
 
-            for (int i = 0; i < Bullets.Count; i++)
-            {
-                Bullets[i].Update();
-                Bullets[i].Clear();
-
-                Bullets[i].Redraw();
-
-            }
         }
 
         private void SpawnEnemy()
         {
-            int x = random.Next(Map.Col - 2*Map.BeginPoint) + Map.BeginPoint;
+            int x = random.Next(Map.Col - 2 * Map.BeginPoint) + Map.BeginPoint;
             var enemy = new Enemy(this, "\\!/", Map.BeginPoint, x);
             enemy.Draw();
             Enemies.Add(enemy);

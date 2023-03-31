@@ -43,11 +43,11 @@ class Program
                 ReadInput();
 
                 game.Update();
+
+                Thread.Sleep(50);
             }
 
-
-
-
+            
         }
 
         //SetUpConsole();

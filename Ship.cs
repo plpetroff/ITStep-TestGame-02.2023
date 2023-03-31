@@ -58,7 +58,7 @@
 
         public void Fire(Direction direction)
         {
-            Game.Bullets.Add(new Bullet(Game, Row +  Length/2, Col-1, direction));
+            Game.Bullets.Add(new Bullet(Game, Row +  Length/2 -2 , Col+1, direction));
         }
     }
 }
